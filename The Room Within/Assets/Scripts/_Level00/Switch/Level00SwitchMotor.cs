@@ -42,11 +42,12 @@ public class Level00SwitchMotor : MonoBehaviour {
 		if (other.gameObject.CompareTag ("Player")) 
 		{
 
-			if (Input.GetButtonDown ("Jump") && level00Manager.hasTouchSwitch ) {
+			if (Input.GetButtonDown ("Fire1") && level00Manager.hasTouchSwitch ) {
 
 				Debug.Log ("Click on Button");
 				level00Manager.hasDoorKey = true;
 				level00Manager.hasTouchSwitch = false;
+
 			}
 		}
 

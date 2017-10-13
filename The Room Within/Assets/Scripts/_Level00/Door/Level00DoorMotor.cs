@@ -25,6 +25,7 @@ public class Level00DoorMotor : MonoBehaviour {
 		{
 
 			Debug.Log ("Door Lock, load next scene");
+			level00Manager.LoadTheNextScene ();
 		}
 
 

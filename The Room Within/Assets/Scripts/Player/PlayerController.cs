@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour {
 	public float groundMeter = 0.3f;
 
 
+	public bool canJump = false;
+
 	void Start () {
 
 		rb2d = GetComponent<Rigidbody2D> ();
@@ -24,11 +26,15 @@ public class PlayerController : MonoBehaviour {
 	
 
 	void Update () {
-		
 
-		if (Input.GetButtonDown ("Jump") && grounded) {
 
-			rb2d.AddForce (new Vector2 (0, jumpForce));
+		if (canJump) {
+
+			if (Input.GetButtonDown ("Jump") && grounded) {
+
+				rb2d.AddForce (new Vector2 (0, jumpForce));
+			}
+
 		}
 		
 	}
