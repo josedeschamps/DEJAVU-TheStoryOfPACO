@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Level02SwitchMotor : MonoBehaviour {
+public class Level02HiddenSwitchMotor : MonoBehaviour {
+
 
 	private Level02Manager level02Manager;
+
 
 
 	void Start () {
@@ -12,22 +14,7 @@ public class Level02SwitchMotor : MonoBehaviour {
 		level02Manager = GameObject.FindGameObjectWithTag ("Level02Manager").GetComponent<Level02Manager> ();
 
 	}
-
-
-	void Update () {
-
-	}
-
-
-
-
-	void OnTriggerEnter2D(Collider2D other){
-
-
-
-	}
-
-
+		
 	void OnTriggerStay2D(Collider2D other){
 
 
@@ -37,8 +24,9 @@ public class Level02SwitchMotor : MonoBehaviour {
 			if (Input.GetButtonDown ("Fire1") && level02Manager.hasDoorKey == false) {
 
 
-				Debug.Log ("Click on Button");
-				level02Manager.ClickToTake (1);
+				level02Manager.hasDoorKey = true;
+
+				Debug.Log ("Has open the door");
 
 			}
 		}
@@ -47,9 +35,3 @@ public class Level02SwitchMotor : MonoBehaviour {
 
 
 }
-	
-
-
-
-
-	

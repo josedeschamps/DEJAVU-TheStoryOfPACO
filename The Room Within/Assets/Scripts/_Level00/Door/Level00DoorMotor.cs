@@ -6,14 +6,17 @@ public class Level00DoorMotor : MonoBehaviour {
 
 	private Level00Manager level00Manager;
 	private bool tellPlayerInfo = false;
+	public GameObject dialogueBox;
+	private StoryTrigger SR;
 
 
 
 
 	void Start () 
 	{
-
+		SR = GetComponent<StoryTrigger> ();
 		level00Manager = GameObject.FindGameObjectWithTag ("Level00Manager").GetComponent<Level00Manager> ();
+	
 
 	}
 
@@ -35,7 +38,10 @@ public class Level00DoorMotor : MonoBehaviour {
 
 			Debug.Log ("Button Animation and dialogue");
 			level00Manager.hasTouchSwitch = true;
+			dialogueBox.SetActive (true);
+			SR.TriggerDialogue ();
 			tellPlayerInfo = true;
+		
 
 		}
 

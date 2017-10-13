@@ -20,8 +20,6 @@ public class Level00Manager : MonoBehaviour {
 
 
 	IEnumerator StartFader(){
-		yield return new WaitForSeconds (1f);
-		faderAnim.SetBool ("SetFader", true);
 		yield return new WaitForSeconds (.5f);
 		SceneManager.LoadScene (scene);
 
