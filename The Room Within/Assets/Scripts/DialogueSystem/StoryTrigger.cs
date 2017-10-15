@@ -5,6 +5,8 @@ using UnityEngine;
 public class StoryTrigger : MonoBehaviour {
 
 	public Dialogue dialogue;
+	public PlayerController playerController;
+	public Animator playerAnim;
 
 
 
@@ -12,5 +14,8 @@ public class StoryTrigger : MonoBehaviour {
 	{
 
 		FindObjectOfType<DialogueManager> ().StartDialogue (dialogue);
+		playerController.canMove = true;
+		playerAnim.SetFloat ("Speed", 0.0f);
+
 	}
 }

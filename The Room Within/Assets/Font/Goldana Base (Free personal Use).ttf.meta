@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: ab83e2ff381221b41b3ef390638cb0fd
+timeCreated: 1508040903
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Goldana
+  fontNames:
+  - Goldana
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

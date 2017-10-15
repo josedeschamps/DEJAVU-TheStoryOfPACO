@@ -6,6 +6,11 @@ public class DialogueManager : MonoBehaviour {
 
 	public Text nameText;
 	public Text dialogueText;
+	public PlayerController playerController;
+	public GameObject dialogueBox;
+	bool canSkipStory = false;
+	public Animator thoughtBubble;
+	public GameObject bubbles;
 //	public Animator dialogueAnim;
 
 
@@ -21,10 +26,31 @@ public class DialogueManager : MonoBehaviour {
 	}
 
 
+	void Update(){
+
+
+		if (canSkipStory) {
+
+
+			if (Input.GetButtonDown ("Fire1")) {
+				canSkipStory = false;
+				DisplayNextSentence ();
+
+
+			}
+
+		}
+
+	}
+
+
 	public void StartDialogue(Dialogue dialogue)
 	{
 
 	//	dialogueAnim.SetBool ("OpenDialogue", true);
+		thoughtBubble.SetBool("SetBubble",true);
+
+	
 		nameText.text = dialogue.playerName;
 		sentences.Clear ();
 
@@ -32,12 +58,14 @@ public class DialogueManager : MonoBehaviour {
 
 			sentences.Enqueue (sentence);
 		}
-
+	
 		DisplayNextSentence ();
+
 	}
 
 
 	public void DisplayNextSentence(){
+
 
 		if (sentences.Count == 0) {
 
@@ -48,25 +76,33 @@ public class DialogueManager : MonoBehaviour {
 		string sentence = sentences.Dequeue ();
 		StopAllCoroutines ();
 		StartCoroutine (TypeSentence (sentence));
+		canSkipStory = true;
+
 
 	}
 
 
 	void EndDialogue(){
 
+		playerController.canMove = false;
+		dialogueBox.SetActive (false);
+		thoughtBubble.SetBool("SetBubble",false);
+		bubbles.SetActive (false);
 		//dialogueAnim.SetBool ("OpenDialogue", false);
 		Debug.Log("End Text");
+
 	}
 
 
 
 	IEnumerator TypeSentence(string sentence){
-
+		
 		dialogueText.text = "";
 		foreach (char letter in sentence.ToCharArray()) {
 
-			yield return new WaitForSeconds (.1f);
+			yield return new WaitForSeconds (.01f);
 			dialogueText.text += letter;
+
 			yield return null;
 
 		}

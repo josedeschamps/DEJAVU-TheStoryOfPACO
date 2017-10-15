@@ -8,6 +8,7 @@ public class Level00DoorMotor : MonoBehaviour {
 	private bool tellPlayerInfo = false;
 	public GameObject dialogueBox;
 	private StoryTrigger SR;
+	public GameObject Bubbles;
 
 
 
@@ -39,6 +40,7 @@ public class Level00DoorMotor : MonoBehaviour {
 			Debug.Log ("Button Animation and dialogue");
 			level00Manager.hasTouchSwitch = true;
 			dialogueBox.SetActive (true);
+			Bubbles.SetActive (true);
 			SR.TriggerDialogue ();
 			tellPlayerInfo = true;
 		

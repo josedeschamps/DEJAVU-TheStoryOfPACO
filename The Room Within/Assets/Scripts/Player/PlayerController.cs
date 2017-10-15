@@ -8,19 +8,21 @@ public class PlayerController : MonoBehaviour {
 	public float jumpForce = 800f;
 	private bool  grounded;
 	private Rigidbody2D rb2d;
-	//private Animator playerAnim;
+	private Animator playerAnim;
 
 	public Transform groundCheck;
 	public LayerMask whatIsGround;
 	public float groundMeter = 0.3f;
 
 
-	public bool canJump = false;
+	public bool canJump, canMove = false;
+	private SpriteRenderer playerSR;
 
 	void Start () {
 
 		rb2d = GetComponent<Rigidbody2D> ();
-		//playerAnim = GetComponent<Animator> ();
+		playerAnim = GetComponent<Animator> ();
+		playerSR = GetComponent<SpriteRenderer> ();
 		
 	}
 	
@@ -36,17 +38,33 @@ public class PlayerController : MonoBehaviour {
 			}
 
 		}
+
+
+
+		if (Input.GetAxis ("Horizontal") < -0.1f) {
+
+			playerSR.flipX = true;
+		}
+
+
+		if (Input.GetAxis ("Horizontal") > 0.1f) {
+
+			playerSR.flipX = false;
+		}
+
 		
 	}
 
 	void FixedUpdate(){
 
+		if(!canMove){
 		//movement <--   -->
 		float Xpos = Input.GetAxis ("Horizontal") * movementSpeed;
 		rb2d.velocity = new Vector2 (Xpos, rb2d.velocity.y);
-		//playerAnim.SetFloat ("Speed", Mathf.Abs (Xpos));
+		playerAnim.SetFloat ("Speed", Mathf.Abs (Xpos));
 		grounded = Physics2D.OverlapCircle (groundCheck.position, groundMeter, whatIsGround);
 		//playerAnim.SetBool ("Jump", !grounded);
+		}
 	}
 		
 }
