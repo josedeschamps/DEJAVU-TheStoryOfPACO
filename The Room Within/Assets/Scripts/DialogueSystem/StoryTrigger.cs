@@ -10,6 +10,7 @@ public class StoryTrigger : MonoBehaviour {
 
 
 
+
 	public void TriggerDialogue()
 	{
 
