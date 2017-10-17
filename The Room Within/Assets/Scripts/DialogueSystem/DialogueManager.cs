@@ -11,7 +11,12 @@ public class DialogueManager : MonoBehaviour {
 	bool canSkipStory = false;
 	public Animator thoughtBubble;
 	public GameObject bubbles;
-//	public Animator dialogueAnim;
+	public AudioSource chatBubble;
+	public AudioSource nextChatSound;
+	public AudioSource switchIDLESound;
+	public Animator switchAnim;
+	public bool switchHasAnim = false;
+
 
 
 	//fi fo collection
@@ -37,6 +42,8 @@ public class DialogueManager : MonoBehaviour {
 				DisplayNextSentence ();
 
 
+
+
 			}
 
 		}
@@ -47,7 +54,8 @@ public class DialogueManager : MonoBehaviour {
 	public void StartDialogue(Dialogue dialogue)
 	{
 
-	//	dialogueAnim.SetBool ("OpenDialogue", true);
+	
+		chatBubble.Play();
 		thoughtBubble.SetBool("SetBubble",true);
 
 	
@@ -73,6 +81,7 @@ public class DialogueManager : MonoBehaviour {
 			return;
 		}
 
+		nextChatSound.Play ();
 		string sentence = sentences.Dequeue ();
 		StopAllCoroutines ();
 		StartCoroutine (TypeSentence (sentence));
@@ -88,8 +97,10 @@ public class DialogueManager : MonoBehaviour {
 		dialogueBox.SetActive (false);
 		thoughtBubble.SetBool("SetBubble",false);
 		bubbles.SetActive (false);
-		//dialogueAnim.SetBool ("OpenDialogue", false);
-		Debug.Log("End Text");
+		if (switchHasAnim) {
+			switchAnim.SetBool ("SetSwitch", true);
+			switchIDLESound.Play ();
+		}
 
 	}
 

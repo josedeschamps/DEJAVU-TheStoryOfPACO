@@ -11,15 +11,24 @@ public class Level01Manager : MonoBehaviour {
 	public int clicksToOpenDoor = 2;
 	public string scene;
 	public Animator faderAnim;
+	public Animator doorOpenAnim;
+	public ShakeMotor sm;
+	public AudioSource doorOpenSFX;
+	private bool playOnce = false;
+
 
 
 
 	void Update(){
 
 
-		if (clicksToOpenDoor <= 0) {
+		if (clicksToOpenDoor <= 0 && !playOnce) {
 			
 			hasDoorKey = true;
+			doorOpenAnim.SetBool ("OpenDoor", true);
+			sm.ShakeCamera (.1f, 1f);
+			doorOpenSFX.Play ();
+			playOnce = true;
 
 		}
 

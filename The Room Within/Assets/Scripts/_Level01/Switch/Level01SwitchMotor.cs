@@ -6,10 +6,14 @@ public class Level01SwitchMotor : MonoBehaviour {
 
 	private Level01Manager level01Manager;
 	//public bool canTouchSwitch = false;
+	private AudioSource switchbuttonSFX;
+	private Animator switchAnim;
 
 	void Start () {
 
 		level01Manager = GameObject.FindGameObjectWithTag ("Level01Manager").GetComponent<Level01Manager> ();
+		switchbuttonSFX = GetComponent<AudioSource> ();
+		switchAnim = GetComponent<Animator> ();
 
 	}
 
@@ -35,6 +39,18 @@ public class Level01SwitchMotor : MonoBehaviour {
 	}
 
 
+	void DelaySwitchAnimation(){
+		StartCoroutine ("DelayAnimation");
+
+	}
+
+	IEnumerator DelayAnimation(){
+
+		yield return new WaitForSeconds (.5f);
+		switchAnim.SetBool ("ClickSwitch", false);
+	}
+
+
 	void OnTriggerStay2D(Collider2D other){
 
 
@@ -44,8 +60,11 @@ public class Level01SwitchMotor : MonoBehaviour {
 			if (Input.GetButtonDown ("Fire1") && level01Manager.hasDoorKey == false) {
 
 		
-				    Debug.Log ("Click on Button");
-					level01Manager.ClickToTake (1);
+				switchbuttonSFX.Play ();
+				level01Manager.ClickToTake (1);
+				switchAnim.SetBool ("ClickSwitch", true);
+				DelaySwitchAnimation ();
+
 
 				}
 			}

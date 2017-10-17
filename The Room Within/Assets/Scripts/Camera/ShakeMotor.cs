@@ -8,10 +8,14 @@ public class ShakeMotor : MonoBehaviour {
 	public float shakeAmount;
 	public float resetTimer = 1f;
 	private float resetTime;
+	private AudioSource camSFX;
 
 
 
+	void Start(){
 
+		camSFX = GetComponent<AudioSource> ();
+	}
 
 
 
@@ -49,6 +53,7 @@ public class ShakeMotor : MonoBehaviour {
 
 		shakeAmount = shakePwr;
 		shakeTimer = shakeDur;
+		camSFX.Play ();
 	}
 
 	void ResetPosition(){

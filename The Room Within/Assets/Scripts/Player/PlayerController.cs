@@ -17,12 +17,14 @@ public class PlayerController : MonoBehaviour {
 
 	public bool canJump, canMove = false;
 	private SpriteRenderer playerSR;
+	private AudioSource playerWalkSFX;
 
 	void Start () {
 
 		rb2d = GetComponent<Rigidbody2D> ();
 		playerAnim = GetComponent<Animator> ();
 		playerSR = GetComponent<SpriteRenderer> ();
+		playerWalkSFX = GetComponent<AudioSource> ();
 		
 	}
 	
@@ -39,19 +41,29 @@ public class PlayerController : MonoBehaviour {
 
 		}
 
+		if (!canMove) {
+
+			if (Input.GetAxis ("Horizontal") < -0.1f) {
+
+				playerSR.flipX = true;
+				if (!playerWalkSFX.isPlaying) {
+					playerWalkSFX.Play ();
+				}
+
+			} 
 
 
-		if (Input.GetAxis ("Horizontal") < -0.1f) {
+			if (Input.GetAxis ("Horizontal") > 0.1f) {
 
-			playerSR.flipX = true;
+				playerSR.flipX = false;
+				if (!playerWalkSFX.isPlaying) {
+
+					playerWalkSFX.Play ();
+				}
+
+			}
+
 		}
-
-
-		if (Input.GetAxis ("Horizontal") > 0.1f) {
-
-			playerSR.flipX = false;
-		}
-
 		
 	}
 
@@ -64,6 +76,8 @@ public class PlayerController : MonoBehaviour {
 		playerAnim.SetFloat ("Speed", Mathf.Abs (Xpos));
 		grounded = Physics2D.OverlapCircle (groundCheck.position, groundMeter, whatIsGround);
 		//playerAnim.SetBool ("Jump", !grounded);
+
+
 		}
 	}
 		

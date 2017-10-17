@@ -10,6 +10,8 @@ public class PreLoaderMotor : MonoBehaviour {
 	private CanvasGroup fadeGroup;
 	private float loadTime;
 	private float minimumLogoTime = 3.0f;
+	public AudioSource logoSound;
+	private bool playOnce = false;
 
 	private void Start(){
 
@@ -39,6 +41,9 @@ public class PreLoaderMotor : MonoBehaviour {
 		if (Time.time < minimumLogoTime) {
 
 			fadeGroup.alpha = 1 - Time.time;
+			PlaySound ();
+
+
 
 		}
 
@@ -49,10 +54,23 @@ public class PreLoaderMotor : MonoBehaviour {
 
 			if (fadeGroup.alpha >= 1) {
 
+
 				SceneManager.LoadScene ("_Menu");
 			}
 		}
 
+	}
+
+
+
+	void PlaySound(){
+
+
+		if (!playOnce) {
+			logoSound.Play ();
+			playOnce = true;
+
+		}
 	}
 
 
