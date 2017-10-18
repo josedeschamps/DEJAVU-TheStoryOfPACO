@@ -12,6 +12,11 @@ public class Level02Manager : MonoBehaviour {
 	public Animator faderAnim;
 	public Rigidbody2D playerRB2D;
 	public SpriteRenderer playerSR;
+	public PlayerController playerController;
+	public Transform groundPosition;
+	public AudioSource gravitySound;
+
+
 
 
 
@@ -21,11 +26,17 @@ public class Level02Manager : MonoBehaviour {
 		if (clicksToOpenDoor <= 0 && !stopCheckingDoor) {
 
 			playerSR.flipY = true;
+			groundPosition.transform.localPosition = new Vector3 (-0.1f, 2f, 0);
 			playerRB2D.gravityScale = -4.0f;
+			playerController.jumpForce = -800f;
+			gravitySound.Play ();
 			stopCheckingDoor = true;
 
 		}
 
+
+
+	
 	}
 
 
@@ -34,12 +45,13 @@ public class Level02Manager : MonoBehaviour {
 		if (clicksToOpenDoor == 0) 
 		{
 			return;
-			//clicksToOpenDoor = clicksToOpenDoor - takeclicks;
+
 
 		}
 
 		clicksToOpenDoor = clicksToOpenDoor - takeclicks;
 	}
+		
 
 
 	IEnumerator StartFader(){

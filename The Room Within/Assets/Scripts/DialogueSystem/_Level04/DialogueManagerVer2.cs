@@ -10,6 +10,7 @@ public class DialogueManagerVer2 : MonoBehaviour {
 	public Text dialogueText;
 	public PlayerController playerController;
 	public GameObject dialogueBox;
+	public GameObject bubbles;
 	bool canSkipStory = false;
 	//	public Animator dialogueAnim;
 
@@ -47,7 +48,7 @@ public class DialogueManagerVer2 : MonoBehaviour {
 	public void StartDialogue(Dialogue dialogue)
 	{
 
-		//	dialogueAnim.SetBool ("OpenDialogue", true);
+	
 
 		nameText.text = dialogue.playerName;
 		sentences.Clear ();
@@ -83,10 +84,10 @@ public class DialogueManagerVer2 : MonoBehaviour {
 	void EndDialogue(){
 
 		playerController.canMove = false;
-		playerController.canJump = true;
 		dialogueBox.SetActive (false);
-		//dialogueAnim.SetBool ("OpenDialogue", false);
-		Debug.Log("End Text");
+		bubbles.SetActive (true);
+
+	
 
 	}
 

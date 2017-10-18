@@ -15,16 +15,17 @@ public class PlayerController : MonoBehaviour {
 	public float groundMeter = 0.3f;
 
 
-	public bool canJump, canMove = false;
+	public bool canMove = false;
 	private SpriteRenderer playerSR;
-	private AudioSource playerWalkSFX;
+	public AudioSource playerWalkSFX;
+	public AudioSource playerJumpSFX;
 
 	void Start () {
 
 		rb2d = GetComponent<Rigidbody2D> ();
 		playerAnim = GetComponent<Animator> ();
 		playerSR = GetComponent<SpriteRenderer> ();
-		playerWalkSFX = GetComponent<AudioSource> ();
+	
 		
 	}
 	
@@ -32,11 +33,12 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 
 
-		if (canJump) {
+		if (!canMove) {
 
 			if (Input.GetButtonDown ("Jump") && grounded) {
 
 				rb2d.AddForce (new Vector2 (0, jumpForce));
+				playerJumpSFX.Play ();
 			}
 
 		}
@@ -46,17 +48,17 @@ public class PlayerController : MonoBehaviour {
 			if (Input.GetAxis ("Horizontal") < -0.1f) {
 
 				playerSR.flipX = true;
-				if (!playerWalkSFX.isPlaying) {
+				if (!playerWalkSFX.isPlaying && grounded) {
 					playerWalkSFX.Play ();
 				}
 
 			} 
 
 
-			if (Input.GetAxis ("Horizontal") > 0.1f) {
+			if (Input.GetAxis ("Horizontal" ) > 0.1f) {
 
 				playerSR.flipX = false;
-				if (!playerWalkSFX.isPlaying) {
+				if (!playerWalkSFX.isPlaying && grounded) {
 
 					playerWalkSFX.Play ();
 				}

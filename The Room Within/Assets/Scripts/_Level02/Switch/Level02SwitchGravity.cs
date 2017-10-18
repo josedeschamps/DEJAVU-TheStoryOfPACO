@@ -8,6 +8,9 @@ public class Level02SwitchGravity : MonoBehaviour {
 	public SpriteRenderer playerSR;
 	private bool hasGravity = false;
 	private Level02Manager level02Manager;
+	public PlayerController playerController;
+	public Transform groundPosition;
+	public AudioSource gravitySound;
 
 
 	void Start(){
@@ -23,10 +26,12 @@ public class Level02SwitchGravity : MonoBehaviour {
 
 			if (Input.GetButtonDown ("Fire1") && !hasGravity) {
 
-
-				Debug.Log ("Turn off Gravity");
+				groundPosition.transform.localPosition = new Vector3 (-0.1f, -1.8f, 0);
+				gravitySound.Play ();
+				playerController.jumpForce = 800f;
 				playerRB2D.gravityScale = 4.0f;
 				playerSR.flipY = false;
+
 
 
 

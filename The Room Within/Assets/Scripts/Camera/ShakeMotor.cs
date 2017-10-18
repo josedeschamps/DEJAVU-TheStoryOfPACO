@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(AudioSource))]
 public class ShakeMotor : MonoBehaviour {
 
 	public float shakeTimer;

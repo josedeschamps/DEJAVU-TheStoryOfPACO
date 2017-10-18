@@ -6,6 +6,7 @@ public class Level03DoorMotor : MonoBehaviour {
 
 
 	private Level03Manager level03Manager;
+	private AudioSource knockSFX;
 
 
 
@@ -14,7 +15,7 @@ public class Level03DoorMotor : MonoBehaviour {
 	{
 
 		level03Manager = GameObject.FindGameObjectWithTag ("Level03Manager").GetComponent<Level03Manager> ();
-
+		knockSFX = GetComponent<AudioSource> ();
 	}
 
 
@@ -25,10 +26,7 @@ public class Level03DoorMotor : MonoBehaviour {
 		{
 
 			if (Input.GetButtonDown ("Fire1") && !level03Manager.hasDoorKey) {
-
-
-				Debug.Log ("Knocking on Door");
-
+				knockSFX.Play ();
 				level03Manager.DoorKnockToTake (1);
 		}
 
@@ -46,7 +44,7 @@ public class Level03DoorMotor : MonoBehaviour {
 			if (Input.GetButtonDown ("Fire1") && level03Manager.hasDoorKey) {
 
 
-				Debug.Log ("EnterDoor");
+		
 
 				level03Manager.LoadTheNextScene ();
 			}
@@ -58,6 +56,17 @@ public class Level03DoorMotor : MonoBehaviour {
 
 
 }
+
+
+	void OnTriggerEnter2D(Collider2D other){
+
+
+		if (other.gameObject.CompareTag ("Player")  && level03Manager.hasDoorKey) {
+
+			level03Manager.LoadTheNextScene ();
+		}
+
+	}
 
 }
 

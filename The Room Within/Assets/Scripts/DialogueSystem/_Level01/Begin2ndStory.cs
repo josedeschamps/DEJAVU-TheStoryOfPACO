@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Begin2ndStory : MonoBehaviour {
 
-	public float timer;
-	bool stopTimer = false;
+	public float timer, backgroundTimer;
+	bool stopTimer,startMusic = false;
 	private _Level01StoryTrigger L01ST;
 	public GameObject bubbles;
 	public GameObject dialogueBox;
+	public AudioSource backgroundMusic;
 
 
 
@@ -26,6 +27,7 @@ public class Begin2ndStory : MonoBehaviour {
 
 
 		timer -= Time.deltaTime;
+		backgroundTimer -= Time.deltaTime;
 
 
 		if (timer < 0 && !stopTimer) {
@@ -35,6 +37,14 @@ public class Begin2ndStory : MonoBehaviour {
 			L01ST.TriggerDialogue ();
 			stopTimer = true;
 
+		}
+
+
+		if (backgroundTimer < 0 && !startMusic) {
+
+
+			backgroundMusic.Play ();
+			startMusic = true;
 		}
 
 	}

@@ -17,6 +17,10 @@ public class _Level01DialogueManager : MonoBehaviour {
 
 
 
+	public bool waitForText = false;
+
+
+
 
 	//fi fo collection
 	private Queue<string> sentences;
@@ -53,7 +57,7 @@ public class _Level01DialogueManager : MonoBehaviour {
 	public void StartDialogue(Dialogue dialogue)
 	{
 
-
+		waitForText = true;
 		chatBubble.Play();
 		thoughtBubble.SetBool("SetBubble", true);
 
@@ -96,6 +100,8 @@ public class _Level01DialogueManager : MonoBehaviour {
 		dialogueBox.SetActive (false);
 		thoughtBubble.SetBool("SetBubble",false);
 		bubbles.SetActive (false);
+		waitForText = false;
+
 	
 	}
 

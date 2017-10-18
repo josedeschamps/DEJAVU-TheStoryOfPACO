@@ -5,7 +5,7 @@ using UnityEngine;
 public class Level04DoorMotor : MonoBehaviour {
 
 	private Level04Manager level04Manager;
-
+	private AudioSource knockSFX;
 
 
 
@@ -13,7 +13,7 @@ public class Level04DoorMotor : MonoBehaviour {
 	{
 
 		level04Manager = GameObject.FindGameObjectWithTag ("Level04Manager").GetComponent<Level04Manager> ();
-
+		knockSFX = GetComponent<AudioSource> ();
 	}
 
 
@@ -24,9 +24,7 @@ public class Level04DoorMotor : MonoBehaviour {
 
 			if (Input.GetButtonDown ("Fire1") && !level04Manager.hasDoorKey) {
 
-
-				Debug.Log ("Knocking on FakeDoor");
-
+				knockSFX.Play ();
 				level04Manager.DoorKnockToTake (1);
 			}
 

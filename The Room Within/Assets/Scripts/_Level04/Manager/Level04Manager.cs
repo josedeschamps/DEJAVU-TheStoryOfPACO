@@ -8,8 +8,11 @@ public class Level04Manager : MonoBehaviour {
 	public bool hasDoorKey, stopCheckingDoor = false;
 	public int clicksToOpenDoor = 50;
 	public int doorKnocks = 50;
+	public int talkToBooks = 2;
 	public string scene;
 	public Animator faderAnim;
+	public BoxCollider2D[] platformCollider;
+	public bool turnPlatform = false;
 
 
 
@@ -17,13 +20,20 @@ public class Level04Manager : MonoBehaviour {
 	void Update(){
 
 
-		if (doorKnocks <= 0 && !stopCheckingDoor) {
+		if (talkToBooks <= 0 && !turnPlatform) {
 
 
-			stopCheckingDoor = true;
-			hasDoorKey = true;
+			for (int i = 0; i < platformCollider.Length; i++) {
 
+				platformCollider [i].enabled = true;
+
+			}
+
+			turnPlatform = true;
 		}
+
+
+
 
 	}
 
@@ -53,6 +63,17 @@ public class Level04Manager : MonoBehaviour {
 		doorKnocks = doorKnocks - takeknocks;
 	}
 
+	public void BookToTake(int takeBooks){
+
+		if (talkToBooks == 0) 
+		{
+			return;
+
+
+		}
+
+		talkToBooks = talkToBooks - takeBooks;
+	}
 
 
 
