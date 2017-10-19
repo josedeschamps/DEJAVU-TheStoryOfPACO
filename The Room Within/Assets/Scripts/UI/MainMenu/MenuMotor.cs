@@ -8,7 +8,14 @@ public class MenuMotor : MonoBehaviour {
 
 	public Animator fader;
 	public AudioSource playsound;
+	public string whatScene;
 
+
+
+	void Start(){
+
+		Cursor.visible = true;
+	}
 
 
 
@@ -36,7 +43,7 @@ public class MenuMotor : MonoBehaviour {
 		yield return new WaitForSeconds (1f);
 		fader.SetTrigger ("SetFader");
 		yield return new WaitForSeconds (.5f);
-		SceneManager.LoadScene ("_Cinematic");
+		SceneManager.LoadScene (whatScene);
 
 	}
 

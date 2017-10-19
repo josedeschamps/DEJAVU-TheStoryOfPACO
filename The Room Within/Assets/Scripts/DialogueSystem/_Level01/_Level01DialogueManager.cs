@@ -18,6 +18,7 @@ public class _Level01DialogueManager : MonoBehaviour {
 
 
 	public bool waitForText = false;
+	public bool waitForTimer = false;
 
 
 
@@ -58,6 +59,7 @@ public class _Level01DialogueManager : MonoBehaviour {
 	{
 
 		waitForText = true;
+		waitForTimer = true;
 		chatBubble.Play();
 		thoughtBubble.SetBool("SetBubble", true);
 
@@ -101,6 +103,7 @@ public class _Level01DialogueManager : MonoBehaviour {
 		thoughtBubble.SetBool("SetBubble",false);
 		bubbles.SetActive (false);
 		waitForText = false;
+		waitForTimer = false;
 
 	
 	}
@@ -112,7 +115,7 @@ public class _Level01DialogueManager : MonoBehaviour {
 		dialogueText.text = "";
 		foreach (char letter in sentence.ToCharArray()) {
 
-		  yield return new WaitForSeconds (.01f);
+		yield return new WaitForSeconds (.01f);
 			dialogueText.text += letter;
 
 			yield return null;
