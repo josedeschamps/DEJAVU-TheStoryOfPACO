@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour {
 
 	public float movementSpeed;
 	public float jumpForce = 800f;
+	private float jumpRate = 0.5f;
+	private float nextJump = 0.0f;
 	private bool  grounded;
 	private Rigidbody2D rb2d;
 	private Animator playerAnim;
@@ -36,8 +38,8 @@ public class PlayerController : MonoBehaviour {
 
 		if (!canMove) {
 
-			if (Input.GetButtonDown ("Jump") && grounded) {
-
+			if (Input.GetButtonDown ("Jump") && grounded && Time.time > nextJump) {
+				nextJump = Time.time + jumpRate;
 				rb2d.AddForce (new Vector2 (0, jumpForce));
 				playerJumpSFX.Play ();
 			}

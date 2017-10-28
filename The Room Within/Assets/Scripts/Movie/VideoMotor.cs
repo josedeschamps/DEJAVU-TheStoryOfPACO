@@ -4,27 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-[RequireComponent (typeof(AudioSource))]
-public class VideoMotor : MonoBehaviour {
-	public MovieTexture movie;
-	private AudioSource sound;
-	public float timer, showTextTimer;
-	bool hasKey = false;
-	bool clickOnce = false;
-	bool hasSkip = false;
 
+public class VideoMotor : MonoBehaviour {
+
+
+	public MovieTexture movie;
 	public Animator fader;
-	public Animator showText;
+
+
+
 
 
 	void Start () {
 
 
 		GetComponent<RawImage> ().texture = movie as MovieTexture;
-		sound = GetComponent<AudioSource> ();
-		sound.clip = movie.audioClip;
 		movie.Play ();
-		sound.Play ();
+		movie.loop = true;
+	
 
 	}
 
@@ -32,40 +29,57 @@ public class VideoMotor : MonoBehaviour {
 
 	void Update(){
 
-		timer -= Time.deltaTime;
-		showTextTimer -= Time.deltaTime;
-		if (timer < 0 && !hasKey) {
-			showText.SetBool ("ShowText", false);
-			FadeScene ();
-			hasKey = true;
+	
 
+		if (Input.GetButtonDown ("Fire1")) {
+
+			StartGame ();
 		}
 
 
-		if (showTextTimer < 0 && !hasSkip) {
+		if (Input.GetAxis ("Horizontal") < -0.1f) {
 
-			showText.SetBool ("ShowText", true);
-			hasSkip= true;
+			StartGame ();
+			}
+
+	
+
+
+		if (Input.GetAxis ("Horizontal") > 0.1f) {
+
+
+			StartGame ();
 		}
 
 
 
-		if(Input.GetButtonDown("Fire1") && !clickOnce){
 
-			FadeScene();
-			clickOnce = true;
 
-		}
-			
+
+
 
 	}
 
+
+	public void StartGame(){
+
+
+		FadeScene ();
+	
+
+
+
+	}
+
+
+
+
 	IEnumerator FadeNLoadScene(){
 
-		yield return new WaitForSeconds (.5f);
-		fader.SetTrigger ("SetFader");
 		yield return new WaitForSeconds (1f);
-		SceneManager.LoadScene ("_Level00");
+		fader.SetTrigger ("SetFader");
+		yield return new WaitForSeconds (.5f);
+		SceneManager.LoadScene ("_Menu");
 
 	}
 
@@ -76,6 +90,8 @@ public class VideoMotor : MonoBehaviour {
 		StartCoroutine ("FadeNLoadScene");
 
 	}
+
+
 
 
 

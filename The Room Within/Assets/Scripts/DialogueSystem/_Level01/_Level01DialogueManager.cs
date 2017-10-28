@@ -65,6 +65,7 @@ public class _Level01DialogueManager : MonoBehaviour {
 
 
 		nameText.text = dialogue.playerName;
+
 		sentences.Clear ();
 
 		foreach (string sentence in dialogue.sentences) {
@@ -112,7 +113,7 @@ public class _Level01DialogueManager : MonoBehaviour {
 
 	IEnumerator TypeSentence(string sentence){
 
-		dialogueText.text = "";
+		dialogueText.text = " ";
 		foreach (char letter in sentence.ToCharArray()) {
 
 		yield return new WaitForSeconds (.01f);

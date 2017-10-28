@@ -18,6 +18,16 @@ public class MenuMotor : MonoBehaviour {
 	}
 
 
+	void Update(){
+
+		//just for the demo game.
+		if (Input.GetButtonDown ("Fire1")) {
+
+			StartGame ();
+		}
+
+	}
+
 
 	public void StartGame(){
 

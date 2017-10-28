@@ -60,6 +60,7 @@ public class DialogueManager : MonoBehaviour {
 
 	
 		nameText.text = dialogue.playerName;
+
 		sentences.Clear ();
 
 		foreach (string sentence in dialogue.sentences) {

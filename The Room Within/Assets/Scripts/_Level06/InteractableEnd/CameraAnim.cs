@@ -11,6 +11,7 @@ public class CameraAnim : MonoBehaviour {
 	private bool hasKey = false;
 	public BoxCollider2D playerBoundary;
 	public AudioSource sceneBackgroundSFX;
+	public Animator groundAnim;
 
 
 	
@@ -39,6 +40,7 @@ public class CameraAnim : MonoBehaviour {
 			sceneBackgroundSFX.Play ();
 			playerController.canMove = true;
 			playerAnim.SetFloat ("Speed", 0.0f);
+			groundAnim.SetBool ("SetGround", true);
 			DelayStoryLine ();
 			hasKey = true;
 
